@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Каталог продукции</h1>
+    <hr>
+    <table class="table table-striped">
+        <tr>
+            <h2><a th:href="@{'/add'}" class="btn btn-primary">Внести изменения</a></h2>
+        </tr>
+        <thead>
+        <tr>
+            <th scope="row"></th>
+            <th scope="col">ID</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Цена</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="p : ${products}">
+            <th scope="row"></th>
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.title}"></td>
+            <td th:text="${p.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+<div class="footer card-footer">
+
+    <div class="sum">
+        <h4 th:text="${'Общее количество позиций: ' + products.size()}"></h4>
+    </div>
+</div>
+</div>
+</body>
+</html>
