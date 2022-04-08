@@ -9,13 +9,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@Component
-public class ProductsRepository {
+@Component("ProductsRepository")
+public class ProductsRepository implements ProductRepository {
     private List<Product> products;
     private long index = 6L;
 
     @PostConstruct
-    public void ini() {
+    public void init() {
         this.products = new ArrayList<>(Arrays.asList(
                 new Product("milk", 1L, 120),
                 new Product("bread", 2L, 82),
@@ -23,18 +23,20 @@ public class ProductsRepository {
                 new Product("cheese", 4L, 1300),
                 new Product("potato", 5L, 86),
                 new Product("onion", 6L, 110)
-
         ));
     }
 
+    @Override
     public List<Product> findAll() {
         return Collections.unmodifiableList(products);
     }
 
+    @Override
     public Product findById(Long id) {
         return products.stream().filter(i -> i.getId().equals(id)).findFirst().get();
     }
 
+    @Override
     public void add(Product product) {
         product.setId(++index);
         products.add(product);
